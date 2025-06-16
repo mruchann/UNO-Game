@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="tr.edu.metu.ceng.uno.controller.LeaderboardViewController"
+           prefHeight="700" prefWidth="900"
+           stylesheets="@css/leaderboard.css, @styles/common.css">
+    
+    <!-- Background with overlay -->
+    <StackPane>
+        <ImageView fitWidth="900" fitHeight="700" preserveRatio="false">
+            <image>
+                <Image url="@images/background.png" />
+            </image>
+        </ImageView>
+        <Rectangle width="900" height="700" fill="rgba(0,0,0,0.7)" />
+    </StackPane>
+    
+    <BorderPane>
+        <top>
+            <HBox alignment="CENTER" spacing="20">
+                <padding>
+                    <Insets top="30" right="30" bottom="10" left="30"/>
+                </padding>
+                
+                <ImageView fitWidth="180" preserveRatio="true">
+                    <image>
+                        <Image url="@images/uno.jpg" />
+                    </image>
+                    <effect>
+                        <DropShadow color="#ff0000" radius="15" spread="0.4" />
+                    </effect>
+                </ImageView>
+                
+                <VBox alignment="CENTER">
+                    <Text text="LEADERBOARD" fill="white" 
+                          style="-fx-font-family: 'Montserrat'; -fx-font-size: 48px;">
+                        <effect>
+                            <DropShadow color="#ff0000" radius="8" spread="0.4" />
+                        </effect>
+                    </Text>
+                    <Text text="BEST UNO PLAYERS" fill="#d9d9d9"
+                          style="-fx-font-family: 'Verdana'; -fx-font-size: 16px;">
+                        <effect>
+                            <DropShadow color="#000000" radius="3" spread="0.2" />
+                        </effect>
+                    </Text>
+                </VBox>
+                
+                <Region HBox.hgrow="ALWAYS" />
+                
+                <Button fx:id="backButton" text="BACK" 
+                        style="-fx-background-color: linear-gradient(to bottom, #ff3333, #cc0000); 
+                               -fx-text-fill: white; 
+                               -fx-font-weight: bold; 
+                               -fx-font-size: 14px; 
+                               -fx-padding: 10px 20px; 
+                               -fx-background-radius: 20;"
+                        onAction="#handleBack">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                            <image>
+                                <Image url="@images/back-arrow.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <effect>
+                        <DropShadow color="#000000" radius="8" spread="0.3" />
+                    </effect>
+                </Button>
+            </HBox>
+        </top>
+        
+        <center>
+            <VBox alignment="CENTER" spacing="15">
+                <padding>
+                    <Insets top="10" right="30" bottom="30" left="30"/>
+                </padding>
+                
+                <TabPane tabClosingPolicy="UNAVAILABLE" maxWidth="820"
+                         style="-fx-tab-min-width: 120px; -fx-tab-max-width: 120px; -fx-tab-min-height: 40px;">
+                    <tabs>
+                        <Tab text="ALL-TIME">
+                            <graphic>
+                                <ImageView fitHeight="24" fitWidth="24" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/trophy.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox spacing="10" alignment="CENTER">
+                                <HBox alignment="CENTER_LEFT" maxWidth="820" style="-fx-background-color: linear-gradient(to right, #ff3333, rgba(204, 0, 0, 0.7)); -fx-background-radius: 10 10 0 0; -fx-padding: 10;">
+                                    <Text text="LEGENDARY PLAYERS" fill="white" style="-fx-font-family: 'Montserrat'; -fx-font-size: 24px;" />
+                                </HBox>
+                                <TableView fx:id="allTimeTable" maxWidth="820">
+                                    <columns>
+                                        <TableColumn fx:id="allTimeRankColumn" text="RANK" prefWidth="100" styleClass="rank-column" style="-fx-alignment: CENTER;"/>
+                                        <TableColumn fx:id="allTimeUsernameColumn" text="PLAYER" prefWidth="400" style="-fx-alignment: CENTER;"/>
+                                        <TableColumn fx:id="allTimeScoreColumn" text="SCORE" prefWidth="320" style="-fx-alignment: CENTER;"/>
+                                    </columns>
+                                    <placeholder>
+                                        <Label text="No legendary players yet. Be the first!" style="-fx-text-fill: white;" />
+                                    </placeholder>
+                                </TableView>
+                            </VBox>
+                        </Tab>
+                        <Tab text="MONTHLY">
+                            <graphic>
+                                <ImageView fitHeight="24" fitWidth="24" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/calendar.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox spacing="10" alignment="CENTER">
+                                <HBox alignment="CENTER_LEFT" maxWidth="820" style="-fx-background-color: linear-gradient(to right, #ff9900, rgba(204, 153, 0, 0.7)); -fx-background-radius: 10 10 0 0; -fx-padding: 10;">
+                                    <Text text="MONTHLY CHAMPIONS" fill="white" style="-fx-font-family: 'Montserrat'; -fx-font-size: 24px;" />
+                                </HBox>
+                                <TableView fx:id="monthlyTable" maxWidth="820">
+                                    <columns>
+                                        <TableColumn fx:id="monthlyRankColumn" text="RANK" prefWidth="100" styleClass="rank-column" style="-fx-alignment: CENTER;"/>
+                                        <TableColumn fx:id="monthlyUsernameColumn" text="PLAYER" prefWidth="400" style="-fx-alignment: CENTER;"/>
+                                        <TableColumn fx:id="monthlyScoreColumn" text="SCORE" prefWidth="320" style="-fx-alignment: CENTER;"/>
+                                    </columns>
+                                    <placeholder>
+                                        <Label text="No monthly champions yet. Time to play!" style="-fx-text-fill: white;" />
+                                    </placeholder>
+                                </TableView>
+                            </VBox>
+                        </Tab>
+                        <Tab text="WEEKLY">
+                            <graphic>
+                                <ImageView fitHeight="24" fitWidth="24" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/star.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox spacing="10" alignment="CENTER">
+                                <HBox alignment="CENTER_LEFT" maxWidth="820" style="-fx-background-color: linear-gradient(to right, #3399ff, rgba(0, 102, 204, 0.7)); -fx-background-radius: 10 10 0 0; -fx-padding: 10;">
+                                    <Text text="WEEKLY STARS" fill="white" style="-fx-font-family: 'Montserrat'; -fx-font-size: 24px;" />
+                                </HBox>
+                                <TableView fx:id="weeklyTable" maxWidth="820">
+                                    <columns>
+                                        <TableColumn fx:id="weeklyRankColumn" text="RANK" prefWidth="100" styleClass="rank-column" style="-fx-alignment: CENTER;"/>
+                                        <TableColumn fx:id="weeklyUsernameColumn" text="PLAYER" prefWidth="400" style="-fx-alignment: CENTER;"/>
+                                        <TableColumn fx:id="weeklyScoreColumn" text="SCORE" prefWidth="320" style="-fx-alignment: CENTER;"/>
+                                    </columns>
+                                    <placeholder>
+                                        <Label text="No weekly stars yet. Show your skills!" style="-fx-text-fill: white;" />
+                                    </placeholder>
+                                </TableView>
+                            </VBox>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </VBox>
+        </center>
+    </BorderPane>
+</StackPane>

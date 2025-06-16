@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="tr.edu.metu.ceng.uno.controller.LoginViewController"
+           fx:id="rootPane"
+           stylesheets="@styles/common.css"
+           style="-fx-background-image: url('images/background.png'); 
+                  -fx-background-size: cover; 
+                  -fx-background-position: center center; 
+                  -fx-background-repeat: no-repeat;">
+    
+    <!-- Main Content -->
+    <VBox alignment="CENTER" spacing="30" maxWidth="600">
+        <padding>
+            <Insets top="30" right="30" bottom="30" left="30"/>
+        </padding>
+        
+        <!-- Animated UNO Logo Container -->
+        <StackPane>
+            <ImageView fitWidth="280" preserveRatio="true" translateY="-20">
+                <Image url="images/uno.jpg"/>
+                <effect>
+                    <DropShadow radius="15" spread="0.2" color="BLACK"/>
+                </effect>
+            </ImageView>
+        </StackPane>
+        
+        <!-- Login/Register Card -->
+        <StackPane style="-fx-background-color: rgba(255, 255, 255, 0.9); 
+                          -fx-background-radius: 20;"
+                   maxHeight="450">
+            <effect>
+                <DropShadow radius="20" spread="0.1" color="rgba(0, 0, 0, 0.5)"/>
+            </effect>
+            
+            <!-- Tab Container -->
+            <BorderPane>
+                <!-- Custom Tab Header -->
+                <top>
+                    <HBox alignment="CENTER" spacing="2">
+                        <Button fx:id="loginTabButton" text="Login" 
+                                style="-fx-background-color: #d82020; -fx-text-fill: white; 
+                                       -fx-font-weight: bold; -fx-font-size: 16px; 
+                                       -fx-background-radius: 15 15 0 0; -fx-padding: 12 30;"
+                                onAction="#switchToLogin"/>
+                        <Button fx:id="registerTabButton" text="Register" 
+                                style="-fx-background-color: #444444; -fx-text-fill: white; 
+                                       -fx-font-weight: bold; -fx-font-size: 16px; 
+                                       -fx-background-radius: 15 15 0 0; -fx-padding: 12 30;"
+                                onAction="#switchToRegister"/>
+                    </HBox>
+                </top>
+                
+                <center>
+                    <StackPane>
+                        <!-- Login Form -->
+                        <VBox fx:id="loginForm" spacing="15" alignment="CENTER" visible="true">
+                            <padding>
+                                <Insets top="30" right="40" bottom="40" left="40"/>
+                            </padding>
+                            
+                            <!-- Username Field -->
+                            <VBox spacing="5">
+                                <Label text="Username" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                                <TextField fx:id="loginUsername" promptText="Enter your username" 
+                                           style="-fx-background-color: #f0f0f0; -fx-background-radius: 8; 
+                                                  -fx-border-color: #cccccc; -fx-border-radius: 8; 
+                                                  -fx-font-size: 14px; -fx-padding: 10 15;"/>
+                            </VBox>
+                            
+                            <!-- Password Field -->
+                            <VBox spacing="5">
+                                <Label text="Password" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                                <PasswordField fx:id="loginPassword" promptText="Enter your password" 
+                                              style="-fx-background-color: #f0f0f0; -fx-background-radius: 8; 
+                                                     -fx-border-color: #cccccc; -fx-border-radius: 8; 
+                                                     -fx-font-size: 14px; -fx-padding: 10 15;"/>
+                            </VBox>
+                            
+                            <!-- Error Message -->
+                            <Label fx:id="loginErrorLabel" visible="false" 
+                                   style="-fx-text-fill: #d82020; -fx-font-weight: bold; -fx-font-size: 13px;"/>
+                            
+                            <!-- Login Button -->
+                            <Button fx:id="loginButton" text="LOGIN"
+                                    style="-fx-background-color: #d82020; -fx-text-fill: white; 
+                                           -fx-font-weight: bold; -fx-font-size: 16px; 
+                                           -fx-padding: 12 30; -fx-background-radius: 8;"
+                                    prefWidth="220" prefHeight="50" onAction="#handleLogin">
+                                <effect>
+                                    <DropShadow radius="5" spread="0.1" color="rgba(0, 0, 0, 0.3)"/>
+                                </effect>
+                            </Button>
+                            
+                            <!-- Forgot Password Link -->
+                            <Hyperlink fx:id="forgotPasswordLink" text="Forgot Password?" 
+                                      style="-fx-font-size: 13px;" 
+                                      onAction="#handleForgotPassword"/>
+                        </VBox>
+                        
+                        <!-- Register Form -->
+                        <VBox fx:id="registerForm" spacing="12" alignment="CENTER" visible="false">
+                            <padding>
+                                <Insets top="20" right="40" bottom="20" left="40"/>
+                            </padding>
+                            
+                            <!-- Username Field -->
+                            <VBox spacing="5">
+                                <Label text="Username" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                                <TextField fx:id="registerUsername" promptText="Choose a username" 
+                                          style="-fx-background-color: #f0f0f0; -fx-background-radius: 8; 
+                                                 -fx-border-color: #cccccc; -fx-border-radius: 8; 
+                                                 -fx-font-size: 14px; -fx-padding: 10 15;"/>
+                            </VBox>
+                            
+                            <!-- Email Field -->
+                            <VBox spacing="5">
+                                <Label text="Email" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                                <TextField fx:id="registerEmail" promptText="Enter your email" 
+                                          style="-fx-background-color: #f0f0f0; -fx-background-radius: 8; 
+                                                 -fx-border-color: #cccccc; -fx-border-radius: 8; 
+                                                 -fx-font-size: 14px; -fx-padding: 10 15;"/>
+                            </VBox>
+                            
+                            <!-- Password Field -->
+                            <VBox spacing="5">
+                                <Label text="Password" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                                <PasswordField fx:id="registerPassword" promptText="Choose a password" 
+                                              style="-fx-background-color: #f0f0f0; -fx-background-radius: 8; 
+                                                     -fx-border-color: #cccccc; -fx-border-radius: 8; 
+                                                     -fx-font-size: 14px; -fx-padding: 10 15;"/>
+                            </VBox>
+                            
+                            <!-- Confirm Password Field -->
+                            <VBox spacing="5">
+                                <Label text="Confirm Password" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                                <PasswordField fx:id="confirmPassword" promptText="Confirm your password" 
+                                              style="-fx-background-color: #f0f0f0; -fx-background-radius: 8; 
+                                                     -fx-border-color: #cccccc; -fx-border-radius: 8; 
+                                                     -fx-font-size: 14px; -fx-padding: 10 15;"/>
+                            </VBox>
+                            
+                            <!-- Error Message -->
+                            <Label fx:id="registerErrorLabel" visible="false" 
+                                   style="-fx-text-fill: #d82020; -fx-font-weight: bold; -fx-font-size: 13px;"/>
+                            
+                            <!-- Register Button -->
+                            <Button fx:id="registerButton" text="CREATE ACCOUNT" 
+                                    style="-fx-background-color: #d82020; -fx-text-fill: white; 
+                                           -fx-font-weight: bold; -fx-font-size: 16px; 
+                                           -fx-padding: 12 30; -fx-background-radius: 8;"
+                                    prefWidth="220" prefHeight="50" onAction="#handleRegister">
+                                <effect>
+                                    <DropShadow radius="5" spread="0.1" color="rgba(0, 0, 0, 0.3)"/>
+                                </effect>
+                            </Button>
+                        </VBox>
+                        
+                        <!-- Forgot Password Form -->
+                        <VBox fx:id="forgotPasswordForm" spacing="15" alignment="CENTER" visible="false">
+                            <padding>
+                                <Insets top="30" right="40" bottom="40" left="40"/>
+                            </padding>
+                            
+                            <Label text="Reset Password" 
+                                   style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                                   
+                            <Label text="Enter your email address and we'll send you a link to reset your password." 
+                                   style="-fx-font-size: 14px; -fx-text-fill: #555555;" wrapText="true" textAlignment="CENTER"/>
+                            
+                            <!-- Email Field -->
+                            <VBox spacing="5">
+                                <Label text="Email" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+                                <TextField fx:id="forgotPasswordEmail" promptText="Enter your email address" 
+                                          style="-fx-background-color: #f0f0f0; -fx-background-radius: 8; 
+                                                 -fx-border-color: #cccccc; -fx-border-radius: 8; 
+                                                 -fx-font-size: 14px; -fx-padding: 10 15;"/>
+                            </VBox>
+                            
+                            <!-- Message Label -->
+                            <Label fx:id="forgotPasswordMessage" visible="false" 
+                                   style="-fx-font-size: 13px;" wrapText="true"/>
+                            
+                            <!-- Send Button -->
+                            <Button fx:id="forgotPasswordButton" text="SEND RESET LINK"
+                                    style="-fx-background-color: #d82020; -fx-text-fill: white; 
+                                           -fx-font-weight: bold; -fx-font-size: 16px; 
+                                           -fx-padding: 12 30; -fx-background-radius: 8;"
+                                    prefWidth="220" prefHeight="50" onAction="#handleForgotPasswordSubmit">
+                                <effect>
+                                    <DropShadow radius="5" spread="0.1" color="rgba(0, 0, 0, 0.3)"/>
+                                </effect>
+                            </Button>
+                            
+                            <!-- Back to Login Link -->
+                            <Hyperlink text="Back to Login" 
+                                      style="-fx-font-size: 13px;" 
+                                      onAction="#switchToLogin"/>
+                        </VBox>
+                    </StackPane>
+                </center>
+            </BorderPane>
+        </StackPane>
+        
+        <!-- Footer Text -->
+        <Text text="Group #1" fill="white" style="-fx-font-size: 12px;">
+            <effect>
+                <DropShadow radius="2" color="rgba(0, 0, 0, 0.5)"/>
+            </effect>
+        </Text>
+    </VBox>
+</StackPane>

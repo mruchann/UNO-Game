@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tr.edu.metu.ceng.uno.controller.MenuViewController"
+            prefHeight="700" prefWidth="900"
+            stylesheets="@styles/common.css">
+            
+    <top>
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <Label fx:id="usernameLabel" style="-fx-font-size: 16px; -fx-text-fill: white;"/>
+            <Button fx:id="logoutButton" text="Logout" 
+                    style="-fx-background-color: #f44336; -fx-text-fill: white;"
+                    onAction="#handleLogout"/>
+        </HBox>
+    </top>
+            
+    <center>
+        <VBox alignment="CENTER" spacing="30">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- UNO Logo -->
+            <StackPane>
+                <ImageView fitWidth="450" preserveRatio="true">
+                    <Image url="images/uno.jpg"/>
+                    <effect>
+                        <DropShadow radius="10" spread="0.1" color="rgba(0,0,0,0.5)"/>
+                    </effect>
+                </ImageView>
+            </StackPane>
+
+            <VBox alignment="CENTER" spacing="20">
+                <Button fx:id="playButton" text="Singleplayer"
+                        style="-fx-background-color: orange; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px; -fx-padding: 15px 30px;"
+                        prefWidth="300" prefHeight="70"
+                        onAction="#handlePlay"/>
+                
+                <Button fx:id="multiplayerButton" text="Multiplayer" 
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px; -fx-padding: 15px 30px;"
+                        prefWidth="300" prefHeight="70"
+                        onAction="#handleMultiplayer"/>
+                        
+                <Button fx:id="leaderboardButton" text="Leaderboard" 
+                        style="-fx-background-color: purple; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px; -fx-padding: 15px 30px;"
+                        prefWidth="300" prefHeight="70"
+                        onAction="#handleLeaderboard"/>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

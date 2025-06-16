@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tr.edu.metu.ceng.uno.controller.SingleplayerGameViewController"
+            prefHeight="700" prefWidth="900"
+            stylesheets="@styles/common.css">
+            
+    <!-- Top area: Player 3 (top player) and quit button -->
+    <top>
+        <HBox alignment="CENTER" spacing="10">
+            <!-- Quit Button on the left -->
+            <Button fx:id="quitButton" text="QUIT"
+                    style="-fx-background-color: linear-gradient(to bottom, #ff3333, #cc0000);
+                           -fx-text-fill: white;
+                           -fx-font-weight: bold;
+                           -fx-font-size: 14px;
+                           -fx-padding: 10px 20px;
+                           -fx-background-radius: 20;"
+                    onAction="#handleQuit"
+                    HBox.hgrow="NEVER">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
+                        <image>
+                            <Image url="@images/back-arrow.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+                <effect>
+                    <DropShadow color="#000000" radius="8" spread="0.3" />
+                </effect>
+                <HBox.margin>
+                    <Insets left="20" top="10" bottom="10"/>
+                </HBox.margin>
+            </Button>
+
+            <!-- Empty region to push player 3 to center -->
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <!-- Player 3 in the center -->
+            <VBox alignment="CENTER" spacing="5" HBox.hgrow="NEVER">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="Player 3" fx:id="player3Name" style="-fx-font-weight: bold;"/>
+                    <Label text="UNO!" fx:id="player3UnoIndicator" 
+                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #888888;
+                                  -fx-background-color: #eeeeee; -fx-background-radius: 5;
+                                  -fx-padding: 2 8 2 8;">
+                        <effect>
+                            <DropShadow color="#000000" radius="3" spread="0.1" />
+                        </effect>
+                    </Label>
+                </HBox>
+                <HBox fx:id="player3DeckArea" alignment="CENTER" spacing="5" minHeight="120" />
+            </VBox>
+            
+            <!-- Empty region for symmetry -->
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <!-- Empty button to balance the quit button on the right side -->
+            <Button opacity="0" visible="false" 
+                    style="-fx-background-color: transparent;"
+                    HBox.hgrow="NEVER">
+                <graphic>
+                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true" />
+                </graphic>
+                <HBox.margin>
+                    <Insets right="20" top="10" bottom="10"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </top>
+    
+    <!-- Left area: Player 2 (left player) -->
+    <left>
+        <VBox alignment="CENTER" spacing="5">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Player 2" fx:id="player2Name" style="-fx-font-weight: bold;"/>
+                <Label text="UNO!" fx:id="player2UnoIndicator" 
+                       style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #888888;
+                              -fx-background-color: #eeeeee; -fx-background-radius: 5;
+                              -fx-padding: 2 8 2 8;">
+                    <effect>
+                        <DropShadow color="#000000" radius="3" spread="0.1" />
+                    </effect>
+                </Label>
+            </HBox>
+            <VBox fx:id="player2DeckArea" alignment="CENTER" spacing="5" minWidth="120" />
+        </VBox>
+    </left>
+    
+    <!-- Right area: Player 4 (right player) -->
+    <right>
+        <VBox alignment="CENTER" spacing="5">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Player 4" fx:id="player4Name" style="-fx-font-weight: bold;"/>
+                <Label text="UNO!" fx:id="player4UnoIndicator" 
+                       style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #888888;
+                              -fx-background-color: #eeeeee; -fx-background-radius: 5;
+                              -fx-padding: 2 8 2 8;">
+                    <effect>
+                        <DropShadow color="#000000" radius="3" spread="0.1" />
+                    </effect>
+                </Label>
+            </HBox>
+            <VBox fx:id="player4DeckArea" alignment="CENTER" spacing="5" minWidth="120" />
+        </VBox>
+    </right>
+    
+    <!-- Center area: Game information and last played card -->
+    <center>
+        <StackPane>
+            <VBox alignment="CENTER" spacing="15">
+                <!-- Game info area -->
+                <HBox alignment="CENTER" spacing="20">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+<!--                    <Label text="Current Color:" />-->
+<!--                    <Label fx:id="currentColorLabel" text="RED" />-->
+<!--                    <Label text="Direction:" />-->
+<!--                    <Label fx:id="directionLabel" text="CLOCKWISE" />-->
+<!--                    <Label text="Draw Pile:" />-->
+<!--                    <Label fx:id="drawDeckSizeLabel" text="40 cards" />-->
+                </HBox>
+
+                <!-- Last played card -->
+                <HBox alignment="CENTER" spacing="30">
+                    <VBox alignment="CENTER" spacing="5">
+<!--                        <Label text="Last Played Card" />-->
+                        <StackPane fx:id="lastPlayedCardArea" minWidth="120" minHeight="180" 
+                                   style="-fx-background-color: #f0f0f0; -fx-background-radius: 10;"
+                                   styleClass="clickable" />
+                    </VBox>
+                    <VBox alignment="CENTER" spacing="5">
+                        <!--                        <Label text="Last Played Card" />-->
+                        <StackPane fx:id="drawDeckArea" minWidth="120" minHeight="180"
+                                   style="-fx-background-color: #f0f0f0; -fx-background-radius: 10;"
+                                   styleClass="clickable" />
+                    </VBox>
+                </HBox>
+
+                <HBox alignment="CENTER" spacing="30">
+                    <VBox alignment="CENTER">
+                        <StackPane fx:id="currentColorArea" minWidth="50" minHeight="50"
+                                   style="-fx-background-radius: 1;">
+                        </StackPane>
+                    </VBox>
+
+                    <VBox alignment="CENTER">
+                        <StackPane fx:id="directionArea" minWidth="100" minHeight="100">
+                        </StackPane>
+                    </VBox>
+                </HBox>
+
+                <!-- Inline color picker, initially invisible -->
+                <GridPane fx:id="colorPickerPane" alignment="CENTER" hgap="10" vgap="10" visible="false" managed="false">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <Label text="Select a color:" GridPane.columnIndex="0" GridPane.columnSpan="2" 
+                           GridPane.rowIndex="0" GridPane.halignment="CENTER"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <StackPane fx:id="redColorButton" minWidth="80" minHeight="80" 
+                               style="-fx-background-color: red; -fx-background-radius: 10;"
+                               GridPane.columnIndex="0" GridPane.rowIndex="1"
+                               styleClass="clickable"/>
+                    <StackPane fx:id="blueColorButton" minWidth="80" minHeight="80" 
+                               style="-fx-background-color: blue; -fx-background-radius: 10;"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1"
+                               styleClass="clickable"/>
+                    <StackPane fx:id="greenColorButton" minWidth="80" minHeight="80" 
+                               style="-fx-background-color: green; -fx-background-radius: 10;"
+                               GridPane.columnIndex="0" GridPane.rowIndex="2"
+                               styleClass="clickable"/>
+                    <StackPane fx:id="yellowColorButton" minWidth="80" minHeight="80" 
+                               style="-fx-background-color: gold; -fx-background-radius: 10;"
+                               GridPane.columnIndex="1" GridPane.rowIndex="2"
+                               styleClass="clickable"/>
+                </GridPane>
+            </VBox>
+        </StackPane>
+    </center>
+    
+    <!-- Bottom area: Player 1 (current player) -->
+    <bottom>
+        <VBox alignment="CENTER" spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="20" left="10"/>
+            </padding>
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="(You)" fx:id="player1Name" style="-fx-font-weight: bold;"/>
+                <Label text="UNO!" fx:id="player1UnoIndicator" 
+                       style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #888888;
+                              -fx-background-color: #eeeeee; -fx-background-radius: 5;
+                              -fx-padding: 2 8 2 8;">
+                    <effect>
+                        <DropShadow color="#000000" radius="3" spread="0.1" />
+                    </effect>
+                </Label>
+            </HBox>
+
+            <!-- Cheat action buttons -->
+            <HBox alignment="CENTER" spacing="20">
+                <padding>
+                    <Insets top="5" bottom="10"/>
+                </padding>
+
+                <Button fx:id="reverseButton" text="Reverse" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10px 20px;
+"/>
+                <Button fx:id="skipButton" text="Skip" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10px 20px;
+"/>
+                <Button fx:id="drawTwoButton" text="Draw Two" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10px 20px;
+"/>
+                <Button fx:id="wildButton" text="Wild" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10px 20px;
+"/>
+                <Button fx:id="wildDrawFourButton" text="Wild Draw Four" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10px 20px;
+"/>
+                <Button fx:id="skipEveryoneOnceButton" text="Skip everyone once" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10px 20px;
+"/>
+            </HBox>
+            
+            <HBox fx:id="player1DeckArea" alignment="CENTER" spacing="5" minHeight="150" styleClass="clickable" />
+        </VBox>
+    </bottom>
+    
+</BorderPane>

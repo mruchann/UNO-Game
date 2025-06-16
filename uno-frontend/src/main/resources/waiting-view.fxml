@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tr.edu.metu.ceng.uno.controller.WaitingViewController"
+            prefHeight="700" prefWidth="900"
+            stylesheets="@styles/common.css">
+            
+    <center>
+        <VBox alignment="CENTER" spacing="30">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <Text text="Waiting for another player..." 
+                  style="-fx-font-size: 32px; -fx-fill: black; -fx-font-weight: bold;">
+                <effect>
+                    <javafx.scene.effect.DropShadow radius="5" color="#cccccc"/>
+                </effect>
+            </Text>
+            
+            <ProgressIndicator progress="-1.0" prefWidth="100" prefHeight="100"/>
+            
+            <Label text="Please wait while we find an opponent for you..." 
+                   style="-fx-font-size: 16px; -fx-text-fill: black;">
+                <effect>
+                    <javafx.scene.effect.DropShadow radius="3" color="#cccccc"/>
+                </effect>
+            </Label>
+            
+            <Button fx:id="cancelButton" text="Cancel" 
+                    style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px; -fx-padding: 10px 20px;"
+                    prefWidth="150" onAction="#handleCancelButton"/>
+        </VBox>
+    </center>
+</BorderPane> 
